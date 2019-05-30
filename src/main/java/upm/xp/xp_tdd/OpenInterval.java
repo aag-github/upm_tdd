@@ -1,14 +1,9 @@
 package upm.xp.xp_tdd;
 
-public class OpenInterval {
-
-    private double min;
-    
-    private double max;
+public class OpenInterval extends Interval {
 
     public OpenInterval(double min, double max) {
-        this.min = min;
-        this.max = max;
+        super(min, max);
     }
 
     public boolean isEqual(OpenInterval another) {
@@ -22,7 +17,8 @@ public class OpenInterval {
                 another.isIncluded(this.min);
     }
 
-    private boolean isIncluded(double value) {
+    @Override
+    protected boolean isIncluded(double value) {
         return this.min < value && value < this.max;
     }
 
