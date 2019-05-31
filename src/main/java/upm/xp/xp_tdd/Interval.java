@@ -17,34 +17,30 @@ public class Interval {
     protected boolean isIncluded(double value) {
         return minLimit.isMatch(value) && maxLimit.isMatch(value);
     }
-
-    public MinLimit getIntersectionMin(Interval another) {
+    
+    public MinLimit getMaximumOfMinLimits(Interval another) {
         if (this.minLimit.getValue() > another.minLimit.getValue()) {
             return this.minLimit;
         } else if (another.minLimit.getValue() > this.minLimit.getValue()) {
             return another.minLimit;
-        } else if (this.minLimit.isOpen()) {
-            return this.minLimit;
         } else {
-            return another.minLimit;
+            return this.minLimit.isOpen() ? this.minLimit : another.minLimit;
         }
     }
 
-    public MaxLimit getIntersectionMax(Interval another) {
+    public MaxLimit getMinimumOfMaxLimits(Interval another) {
         if (this.maxLimit.getValue() < another.maxLimit.getValue()) {
             return this.maxLimit;
         } else if (another.maxLimit.getValue() < this.maxLimit.getValue()) {
             return another.maxLimit;
-        } else if (this.maxLimit.isOpen()) {
-            return this.maxLimit;
         } else {
-            return another.maxLimit;
+            return this.maxLimit.isOpen() ? this.maxLimit : another.maxLimit;
         }
     }
 
     public boolean isIntersected(Interval another) {
-        MinLimit min = this.getIntersectionMin(another);
-        MaxLimit max = this.getIntersectionMax(another);
+        MinLimit min = this.getMaximumOfMinLimits(another);
+        MaxLimit max = this.getMinimumOfMaxLimits(another);
 
         if (min.getValue() == max.getValue()) {
             return min.isClosed() && max.isClosed();

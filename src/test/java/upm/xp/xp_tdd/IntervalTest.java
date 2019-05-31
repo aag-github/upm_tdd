@@ -12,7 +12,7 @@ public class IntervalTest {
         Interval interval1 = new IntervalBuilder().withMin(3).build();
         Interval interval2 = new IntervalBuilder().withMin(2).build();
         
-        Limit result = interval1.getIntersectionMin(interval2);
+        Limit result = interval1.getMaximumOfMinLimits(interval2);
         
         assertEquals(result.getValue(), 3, 1E-6);
         assertTrue(result.isClosed());
@@ -23,11 +23,11 @@ public class IntervalTest {
         Interval interval1 = new IntervalBuilder().withMin(3).withMinType("(").build();
         Interval interval2 = new IntervalBuilder().withMin(2).build();
         
-        Limit result1 = interval1.getIntersectionMin(interval2);    
+        Limit result1 = interval1.getMaximumOfMinLimits(interval2);    
         assertEquals(result1.getValue(), 3, 1E-6);
         assertFalse(result1.isClosed());
 
-        Limit result2 = interval2.getIntersectionMin(interval1);    
+        Limit result2 = interval2.getMaximumOfMinLimits(interval1);    
         assertEquals(result2.getValue(), 3, 1E-6);
         assertFalse(result2.isClosed());
     }
@@ -37,7 +37,7 @@ public class IntervalTest {
         Interval interval1 = new IntervalBuilder().withMin(2).build();
         Interval interval2 = new IntervalBuilder().withMin(2).build();
         
-        Limit result = interval1.getIntersectionMin(interval2);
+        Limit result = interval1.getMaximumOfMinLimits(interval2);
         
         assertEquals(result.getValue(), 2, 1E-6);
         assertTrue(result.isClosed());
@@ -48,11 +48,11 @@ public class IntervalTest {
         Interval interval1 = new IntervalBuilder().withMin(2).withMinType("(").build();
         Interval interval2 = new IntervalBuilder().withMin(2).build();
         
-        Limit result1 = interval1.getIntersectionMin(interval2);    
+        Limit result1 = interval1.getMaximumOfMinLimits(interval2);    
         assertEquals(result1.getValue(), 2, 1E-6);
         assertFalse(result1.isClosed());
 
-        Limit result2 = interval2.getIntersectionMin(interval1);    
+        Limit result2 = interval2.getMaximumOfMinLimits(interval1);    
         assertEquals(result2.getValue(), 2, 1E-6);
         assertFalse(result2.isClosed());
     }
@@ -62,7 +62,7 @@ public class IntervalTest {
         Interval interval1 = new IntervalBuilder().withMax(3).build();
         Interval interval2 = new IntervalBuilder().withMax(2).build();
         
-        Limit result = interval1.getIntersectionMax(interval2);
+        Limit result = interval1.getMinimumOfMaxLimits(interval2);
         
         assertEquals(result.getValue(), 2, 1E-6);
         assertTrue(result.isClosed());
@@ -73,11 +73,11 @@ public class IntervalTest {
         Interval interval1 = new IntervalBuilder().withMax(3).build();
         Interval interval2 = new IntervalBuilder().withMax(2).withMaxType(")").build();
         
-        Limit result1 = interval1.getIntersectionMax(interval2);    
+        Limit result1 = interval1.getMinimumOfMaxLimits(interval2);    
         assertEquals(result1.getValue(), 2, 1E-6);
         assertFalse(result1.isClosed());
 
-        Limit result2 = interval2.getIntersectionMax(interval1);    
+        Limit result2 = interval2.getMinimumOfMaxLimits(interval1);    
         assertEquals(result2.getValue(), 2, 1E-6);
         assertFalse(result2.isClosed());
     }
@@ -87,7 +87,7 @@ public class IntervalTest {
         Interval interval1 = new IntervalBuilder().withMax(2).build();
         Interval interval2 = new IntervalBuilder().withMax(2).build();
         
-        Limit result = interval1.getIntersectionMax(interval2);
+        Limit result = interval1.getMinimumOfMaxLimits(interval2);
         
         assertEquals(result.getValue(), 2, 1E-6);
         assertTrue(result.isClosed());
@@ -98,11 +98,11 @@ public class IntervalTest {
         Interval interval1 = new IntervalBuilder().withMax(2).build();
         Interval interval2 = new IntervalBuilder().withMax(2).withMaxType(")").build();
 
-        Limit result1 = interval1.getIntersectionMax(interval2);    
+        Limit result1 = interval1.getMinimumOfMaxLimits(interval2);    
         assertEquals(result1.getValue(), 2, 1E-6);
         assertFalse(result1.isClosed());
 
-        Limit result2 = interval2.getIntersectionMax(interval1);    
+        Limit result2 = interval2.getMinimumOfMaxLimits(interval1);    
         assertEquals(result2.getValue(), 2, 1E-6);
         assertFalse(result2.isClosed());
     }
