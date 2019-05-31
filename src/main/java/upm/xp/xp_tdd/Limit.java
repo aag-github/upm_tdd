@@ -14,7 +14,7 @@ public abstract class Limit {
     }
     
     public boolean isOpen() {
-        return !isMatch(this.value);
+        return !isClosed();
     }
     
     public double getValue() {

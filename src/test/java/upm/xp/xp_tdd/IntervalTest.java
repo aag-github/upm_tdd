@@ -106,4 +106,9 @@ public class IntervalTest {
         assertEquals(result2.getValue(), 2, 1E-6);
         assertFalse(result2.isClosed());
     }
+    
+    @Test(expected = AssertionError.class)
+    public void MaxMinWrongValues() {
+        new IntervalBuilder().withMax(2).withMin(3).build();
+    }
 }

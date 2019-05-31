@@ -6,6 +6,7 @@ public class Interval {
     MaxLimit maxLimit;
 
     public Interval(MinLimit minLimit, MaxLimit maxLimit) {
+        assert(minLimit.getValue() <= maxLimit.getValue());
         this.minLimit = minLimit;
         this.maxLimit = maxLimit;
     }
