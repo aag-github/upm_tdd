@@ -1,14 +1,20 @@
 package upm.xp.xp_tdd;
 
-public abstract class Interval {
+public class Interval {
 
     protected double min;
     protected double max;
+    MinLimit minLimit;
+    MaxLimit maxLimit;
 
-    public Interval(double min, double max) {
-        this.min = min;
-        this.max = max;
+    public Interval(MinLimit minLimit, MaxLimit maxLimit) {
+        this.minLimit = minLimit;
+        this.maxLimit = maxLimit;
+        this.min = minLimit.getValue();
+        this.max = maxLimit.getValue();
     }
     
-    protected abstract boolean isIncluded(double value);
+    protected boolean isIncluded(double value) {
+        return minLimit.isMatch(value) && maxLimit.isMatch(value);
+    }
 }

@@ -12,4 +12,12 @@ public abstract class Limit {
     public boolean isClosed() {
         return isMatch(this.value);
     }
+    
+    public boolean isOpen() {
+        return !isMatch(this.value);
+    }
+    
+    public double getValue() {
+        return value;
+    }
 }

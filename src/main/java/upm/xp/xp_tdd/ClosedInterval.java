@@ -3,7 +3,7 @@ package upm.xp.xp_tdd;
 public class ClosedInterval extends Interval {
 
 	public ClosedInterval(double min, double max) {
-	    super(min, max);
+	    super(new MinClosedLimit(min), new MaxClosedLimit(max));
 	}
 
 	public boolean isIntersected(ClosedInterval another) {
@@ -11,10 +11,4 @@ public class ClosedInterval extends Interval {
 				this.isIncluded(another.max)||
 				another.isIncluded(this.min);
 	}
-
-	@Override
-	protected boolean isIncluded(double value) {
-		return this.min <= value && value <= this.max;
-	}
-
 }
