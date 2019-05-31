@@ -58,11 +58,21 @@ public class ClosedIntervalTest {
 public ClosedIntervalTest() {
 }
     
- @Test
- public void givenTwoInervalsCheckIsIntersectedFunction() {
-     ClosedInterval one = new ClosedIntervalBuilder().min(firstMin).max(firstMax).build();
-     ClosedInterval another = new ClosedIntervalBuilder().min(secondMin).max(secondMax).build();
-     assertEquals(one.isIntersected(another), result);
- }
+@Test
+public void givenTwoInervalsCheckIsIntersectedFunction() {
+    Interval one = new IntervalBuilder().withMin(firstMin)
+                                        .withMax(firstMax)
+                                        .withMinType(firstMinType)
+                                        .withMaxType(firstMaxType)
+                                        .build();
+
+    Interval another = new IntervalBuilder().withMin(secondMin)
+                                            .withMax(secondMax)
+                                            .withMinType(secondMinType)
+                                            .withMaxType(secondMaxType)
+                                            .build();
+
+    assertEquals(one.isIntersected(another), result);
+}
  
 }

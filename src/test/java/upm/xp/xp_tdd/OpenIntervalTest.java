@@ -28,12 +28,12 @@ public class OpenIntervalTest {
                 { "From_OutLeft_To_RightLimit",         "(", 4, 6, ")", "(", 0, 6, ")", true },
                 { "From_OutRight_To_LeftLimit",         "(", 4, 6, ")", "(", 4, 9, ")", true },
                 { "From_OutLeft_To_OutRight",           "(", 4, 6, ")", "(", 0, 9, ")", true },
-                { "ZeroLength_On_RightLimit",           "(", 4, 6, ")", "(", 4, 4, ")", true },
-                { "ZeroLength_On_LeftLimit",            "(", 4, 6, ")", "(", 6, 6, ")", true },
+                { "ZeroLength_On_RightLimit",           "(", 4, 6, ")", "(", 4, 4, ")", false },
+                { "ZeroLength_On_LeftLimit",            "(", 4, 6, ")", "(", 6, 6, ")", false },
                 { "From_LeftLimit_To_Middle",           "(", 4, 6, ")", "(", 4, 5, ")", true },
                 { "From_RightLimit_To_Middle",          "(", 4, 6, ")", "(", 5, 6, ")", true },
-                { "SameLimits",                         "(", 4, 6, ")", "(", 4, 6, ")", true },                
-                { "ZeroLength_InTheMiddle",             "(", 4, 6, ")", "(", 5, 5, ")", true },                
+                { "SameLimits",                         "(", 4, 6, ")", "(", 4, 6, ")", true },
+                { "ZeroLength_InTheMiddle",             "(", 4, 6, ")", "(", 5, 5, ")", false },
         
         };
         assert(true);
@@ -60,8 +60,18 @@ public OpenIntervalTest() {
     
  @Test
  public void givenTwoInervalsCheckIsIntersectedFunction() {
-     OpenInterval one = new OpenIntervalBuilder().min(firstMin).max(firstMax).build();
-     OpenInterval another = new OpenIntervalBuilder().min(secondMin).max(secondMax).build();
+     Interval one = new IntervalBuilder().withMin(firstMin)
+                                         .withMax(firstMax)
+                                         .withMinType(firstMinType)
+                                         .withMaxType(firstMaxType)
+                                         .build();
+
+     Interval another = new IntervalBuilder().withMin(secondMin)
+                                             .withMax(secondMax)
+                                             .withMinType(secondMinType)
+                                             .withMaxType(secondMaxType)
+                                             .build();
+
      assertEquals(one.isIntersected(another), result);
  }
  

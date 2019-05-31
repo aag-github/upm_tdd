@@ -97,7 +97,7 @@ public class IntervalTest {
     public void GetMaxLimitSameValuesOpen() {
         Interval interval1 = new IntervalBuilder().withMax(2).build();
         Interval interval2 = new IntervalBuilder().withMax(2).withMaxType(")").build();
-        
+
         Limit result1 = interval1.getIntersectionMax(interval2);    
         assertEquals(result1.getValue(), 2, 1E-6);
         assertFalse(result1.isClosed());

@@ -41,4 +41,15 @@ public class Interval {
             return another.maxLimit;
         }
     }
+
+    public boolean isIntersected(Interval another) {
+        MinLimit min = this.getIntersectionMin(another);
+        MaxLimit max = this.getIntersectionMax(another);
+
+        if (min.getValue() == max.getValue()) {
+            return min.isClosed() && max.isClosed();
+        } else {
+            return min.getValue() < max.getValue();
+        }
+    }
 }
