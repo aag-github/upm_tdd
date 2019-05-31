@@ -10,6 +10,10 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class Closed_ClosedOpen_IntervalTest extends IntersectionBaseTest {
 
+    // Los test cases se podrían definir sin tantos argumentos, ya que cada clase podría tener un atributo 
+    // que fuera el tipo de los intervalos, en vez de poner "[" "]" "(" ")" todo el rato, pero visualmente ayuda
+    // el ver los inervalos "completos" (con los marcadores del tipo de extremo) cuando estás pensando si un 
+    // test debe devolver true o false
     @Parameters(name = "{index}: Closed_Closed: {0} {1}{2},{3}{4} {5}{6},{7}{8} returns {9}") 
     public static Collection<Object[]> data() {
         Object[][] values = {               

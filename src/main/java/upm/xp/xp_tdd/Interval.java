@@ -11,6 +11,9 @@ public class Interval {
         this.maxLimit = maxLimit;
     }
     
+    // Si nos ceñimos exclusivamente a esta práctica, este método debería borrarse, ya que es código muerto,
+    // pero en una situación de uso de la clase para alguna funcionalidad real, entiendo que este método
+    // es probable que fuera necesario. 
     protected boolean isIncluded(double value) {
         return minLimit.isMatch(value) && maxLimit.isMatch(value);
     }
