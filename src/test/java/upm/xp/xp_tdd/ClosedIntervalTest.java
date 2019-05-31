@@ -1,20 +1,16 @@
 package upm.xp.xp_tdd;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class ClosedIntervalTest {
+public class ClosedIntervalTest extends IntersectionBaseTest {
 
-    @Parameters(name = "{index}: ClosedInterval: {0} {1}{2},{3}{4} {5}{6},{7}{8} returns {9}") 
+    @Parameters(name = "{index}: Closed_Closed: {0} {1}{2},{3}{4} {5}{6},{7}{8} returns {9}") 
     public static Collection<Object[]> data() {
         Object[][] values = {               
                 { "Non-overlapping_ZeroLength_Left",    "[", 4, 6, "]", "[", 0, 0, "]", false },
@@ -36,43 +32,7 @@ public class ClosedIntervalTest {
                 { "ZeroLength_InTheMiddle",             "[", 4, 6, "]", "[", 5, 5, "]", true },                
         
         };
-        assert(true);
         return Arrays.asList(values);
     }
 
-    @Parameter(0) public String name; 
-    
-    @Parameter(1) public String firstMinType;
-    @Parameter(2) public double firstMin;
-    @Parameter(3) public double firstMax;
-    @Parameter(4) public String firstMaxType;
-    
-    @Parameter(5) public String secondMinType;
-    @Parameter(6) public double secondMin;
-    @Parameter(7) public double secondMax;
-    @Parameter(8) public String secondMaxType;
-    
-    @Parameter(9) public boolean result;
-
-    
-public ClosedIntervalTest() {
-}
-    
-@Test
-public void givenTwoInervalsCheckIsIntersectedFunction() {
-    Interval one = new IntervalBuilder().withMin(firstMin)
-                                        .withMax(firstMax)
-                                        .withMinType(firstMinType)
-                                        .withMaxType(firstMaxType)
-                                        .build();
-
-    Interval another = new IntervalBuilder().withMin(secondMin)
-                                            .withMax(secondMax)
-                                            .withMinType(secondMinType)
-                                            .withMaxType(secondMaxType)
-                                            .build();
-
-    assertEquals(one.isIntersected(another), result);
-}
- 
 }
