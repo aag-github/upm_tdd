@@ -1,78 +1,68 @@
 package upm.xp.xp_tdd;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 
-import junit.framework.TestCase;
+@RunWith(Parameterized.class)
+public class OpenIntervalTest {
 
-public class OpenIntervalTest extends TestCase {
+    @Parameters(name = "{index}: OpenInterval: {0} {1}{2},{3}{4} {5}{6},{7}{8} returns {9}") 
+    public static Collection<Object[]> data() {
+        Object[][] values = {               
+                { "Non-overlapping_ZeroLength_Left",    "(", 4, 6, ")", "(", 0, 0, ")", false },
+                { "Non-overlapping_ZeroLength_Right",   "(", 4, 6, ")", "(", 8, 8, ")", false },
+                { "Non-overlapping_Left",               "(", 4, 6, ")", "(", 0, 2, ")", false },
+                { "Non-overlapping_Right",              "(", 4, 6, ")", "(", 8, 9, ")", false },
+                { "Adjacent_Left",                      "(", 4, 6, ")", "(", 0, 4, ")", false },
+                { "Adjacent_Right",                     "(", 4, 6, ")", "(", 6, 9, ")", false },
+                { "From_OutLeft_To_Middle",             "(", 4, 6, ")", "(", 0, 5, ")", true },
+                { "From_OutRight_To_Middle",            "(", 4, 6, ")", "(", 5, 9, ")", true },
+                { "From_OutLeft_To_RightLimit",         "(", 4, 6, ")", "(", 0, 6, ")", true },
+                { "From_OutRight_To_LeftLimit",         "(", 4, 6, ")", "(", 4, 9, ")", true },
+                { "From_OutLeft_To_OutRight",           "(", 4, 6, ")", "(", 0, 9, ")", true },
+                { "ZeroLength_On_RightLimit",           "(", 4, 6, ")", "(", 4, 4, ")", true },
+                { "ZeroLength_On_LeftLimit",            "(", 4, 6, ")", "(", 6, 6, ")", true },
+                { "From_LeftLimit_To_Middle",           "(", 4, 6, ")", "(", 4, 5, ")", true },
+                { "From_RightLimit_To_Middle",          "(", 4, 6, ")", "(", 5, 6, ")", true },
+                { "SameLimits",                         "(", 4, 6, ")", "(", 4, 6, ")", true },                
+                { "ZeroLength_InTheMiddle",             "(", 4, 6, ")", "(", 5, 5, ")", true },                
+        
+        };
+        assert(true);
+        return Arrays.asList(values);
+    }
 
-    @Test
-    public void testIsIntersectedOverlapingByLeft() {
-        OpenInterval one = new OpenIntervalBuilder().min(3).max(14).build();
-        OpenInterval another = new OpenIntervalBuilder().min(1).max(7).build();
-        assertTrue(one.isIntersected(another));
-    }
+    @Parameter(0) public String name; 
     
-    @Test
-    public void testIsIntersectedOverlapingByLeftWithEquals() {
-        OpenInterval one = new OpenIntervalBuilder().min(3).max(14).build();
-        OpenInterval another = new OpenIntervalBuilder().min(3).max(7).build();
-        assertTrue(one.isIntersected(another));
-    }
+    @Parameter(1) public String firstMinType;
+    @Parameter(2) public double firstMin;
+    @Parameter(3) public double firstMax;
+    @Parameter(4) public String firstMaxType;
     
-    @Test
-    public void testIsIntersectedOverlapingByEquals() {
-        OpenInterval one = new OpenIntervalBuilder().min(3).max(14).build();
-        OpenInterval another = new OpenIntervalBuilder().min(3).max(14).build();
-        assertTrue(one.isIntersected(another));
-    }
+    @Parameter(5) public String secondMinType;
+    @Parameter(6) public double secondMin;
+    @Parameter(7) public double secondMax;
+    @Parameter(8) public String secondMaxType;
     
-    @Test
-    public void testIsIntersectedOverlapingByRight() {
-        OpenInterval one = new OpenIntervalBuilder().min(3).max(14).build();
-        OpenInterval another = new OpenIntervalBuilder().min(7).max(17).build();
-        assertTrue(one.isIntersected(another));
-    }
+    @Parameter(9) public boolean result;
+
     
-    @Test
-    public void testIsIntersectedOverlapingByBoth() {
-        OpenInterval one = new OpenIntervalBuilder().min(3).max(14).build();
-        OpenInterval another = new OpenIntervalBuilder().min(0).max(17).build();
-        assertTrue(one.isIntersected(another));
-    }
+public OpenIntervalTest() {
+}
     
-    @Test
-    public void testIsIntersectedOverlapingByInside() {
-        OpenInterval one = new OpenIntervalBuilder().min(3).max(14).build();
-        OpenInterval another = new OpenIntervalBuilder().min(5).max(10).build();
-        assertTrue(one.isIntersected(another));
-    }
-    
-    @Test
-    public void testIsIntersectedNotOverlapingByLeft() {
-        OpenInterval one = new OpenIntervalBuilder().min(3).max(14).build();
-        OpenInterval another = new OpenIntervalBuilder().min(0).max(2).build();
-        assertFalse(one.isIntersected(another));
-    }
-    
-    @Test
-    public void testIsIntersectedNotOverlapingByRight() {
-        OpenInterval one = new OpenIntervalBuilder().min(3).max(14).build();
-        OpenInterval another = new OpenIntervalBuilder().min(16).max(22).build();
-        assertFalse(one.isIntersected(another));
-    }
-    
-   @Test
-    public void testIsIntersectedNextOnLeft() {
-        OpenInterval one = new OpenIntervalBuilder().min(3).max(14).build();
-        OpenInterval another = new OpenIntervalBuilder().min(14).max(22).build();
-        assertFalse(one.isIntersected(another));
-    }
-    
-    @Test
-    public void testIsIntersectedNextOnRight() {
-        OpenInterval one = new OpenIntervalBuilder().min(3).max(14).build();
-        OpenInterval another = new OpenIntervalBuilder().min(0).max(3).build();
-        assertFalse(one.isIntersected(another));
-    }
-	
+ @Test
+ public void givenTwoInervalsCheckIsIntersectedFunction() {
+     OpenInterval one = new OpenIntervalBuilder().min(firstMin).max(firstMax).build();
+     OpenInterval another = new OpenIntervalBuilder().min(secondMin).max(secondMax).build();
+     assertEquals(one.isIntersected(another), result);
+ }
+ 
 }
