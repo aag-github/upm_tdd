@@ -6,7 +6,7 @@ public class MinOpenLimit extends MinLimit {
     }
 
     @Override
-    public boolean isMatch(double target) {
+    public boolean isIncluded(double target) {
         return target > this.value;
     }
 }

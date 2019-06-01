@@ -15,7 +15,7 @@ public class Interval {
     // pero en una situación de uso de la clase para alguna funcionalidad real, entiendo que este método
     // es probable que fuera necesario. 
     protected boolean isIncluded(double value) {
-        return minLimit.isMatch(value) && maxLimit.isMatch(value);
+        return minLimit.isIncluded(value) && maxLimit.isIncluded(value);
     }
     
     public MinLimit getMaximumOfMinLimits(Interval another) {

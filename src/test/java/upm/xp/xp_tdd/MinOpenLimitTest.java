@@ -10,21 +10,21 @@ public class MinOpenLimitTest {
     public void MinOpenLimitLower() {
         MinOpenLimit max = new MinOpenLimit(3);
         
-        assertFalse(max.isMatch(2));
+        assertFalse(max.isIncluded(2));
     }
     
     @Test
     public void MinOpenLimitEqual() {
         MinOpenLimit max = new MinOpenLimit(3);
         
-        assertFalse(max.isMatch(3));        
+        assertFalse(max.isIncluded(3));        
     }
 
     @Test
     public void MinOpenLimitHigher() {
         MinOpenLimit max = new MinOpenLimit(3);
         
-        assertTrue(max.isMatch(4));        
+        assertTrue(max.isIncluded(4));        
     }
     
     @Test

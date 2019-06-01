@@ -10,21 +10,21 @@ public class MaxOpenLimitTest {
     public void MaxOpenLimitLower() {
         MaxOpenLimit max = new MaxOpenLimit(3);
         
-        assertTrue(max.isMatch(2));
+        assertTrue(max.isIncluded(2));
     }
     
     @Test
     public void MaxOpenLimitEqual() {
         MaxOpenLimit max = new MaxOpenLimit(3);
         
-        assertFalse(max.isMatch(3));        
+        assertFalse(max.isIncluded(3));        
     }
 
     @Test
     public void MaxOpenLimitHigher() {
         MaxOpenLimit max = new MaxOpenLimit(3);
         
-        assertFalse(max.isMatch(4));        
+        assertFalse(max.isIncluded(4));        
     }
     
     @Test

@@ -10,21 +10,21 @@ public class MinClosedLimitTest {
     public void MinClosedLimitLower() {
         MinClosedLimit max = new MinClosedLimit(3);
         
-        assertFalse(max.isMatch(2));
+        assertFalse(max.isIncluded(2));
     }
     
     @Test
     public void MinClosedLimitEqual() {
         MinClosedLimit max = new MinClosedLimit(3);
         
-        assertTrue(max.isMatch(3));        
+        assertTrue(max.isIncluded(3));        
     }
 
     @Test
     public void MinClosedLimitHigher() {
         MinClosedLimit max = new MinClosedLimit(3);
         
-        assertTrue(max.isMatch(4));        
+        assertTrue(max.isIncluded(4));        
     }
     
     @Test

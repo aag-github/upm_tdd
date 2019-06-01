@@ -6,7 +6,7 @@ public class MaxOpenLimit extends MaxLimit {
     }
 
     @Override
-    public boolean isMatch(double target) {
+    public boolean isIncluded(double target) {
         return target < value;
     }
 }

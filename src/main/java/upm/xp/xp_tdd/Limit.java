@@ -7,10 +7,10 @@ public abstract class Limit {
         this.value = value;
     }
     
-    public abstract boolean isMatch(double target);
+    public abstract boolean isIncluded(double target);
     
     public boolean isClosed() {
-        return isMatch(this.value);
+        return isIncluded(this.value);
     }
     
     public boolean isOpen() {
